@@ -3,12 +3,12 @@ export interface BaseTaskDTO {
   title: string
   content: string
   done: boolean
-  userId: number
+  userId: number | null
 }
 
 export interface TaskDTO extends BaseTaskDTO {
   id: number
-  userId: number
+  userId: number | null
 }
 
 export interface CreateTaskDTO extends BaseTaskDTO{

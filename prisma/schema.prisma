@@ -10,9 +10,13 @@ datasource db {
 }
 
 model Task {
+
   id      Int     @id @default(autoincrement())
   title   String  @db.VarChar(50)
   content String  @db.VarChar(200)
-  done    Boolean @default(false)
+  done    Boolean @db.TinyInt @default(false)
   userId  Int?
+
+  @@map("tasks")
 }
+
