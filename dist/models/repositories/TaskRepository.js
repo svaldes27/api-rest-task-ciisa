@@ -14,8 +14,46 @@ const prisma = new client_1.PrismaClient();
 class TaskRepository {
     constructor(userId) {
         this.findAll = () => __awaiter(this, void 0, void 0, function* () {
-            const tasks = yield prisma.task.findMany();
+            const tasks = yield prisma.task.findMany({
+                where: {
+                    userId: this.userId
+                }
+            });
             return tasks;
+        });
+        this.findById = (id) => __awaiter(this, void 0, void 0, function* () {
+            const task = yield prisma.task.findFirst({
+                where: {
+                    id,
+                    userId: this.userId
+                }
+            });
+            if (!task)
+                return;
+            return task;
+        });
+        this.create = (task) => __awaiter(this, void 0, void 0, function* () {
+            const newTask = yield prisma.task.create({
+                data: Object.assign(Object.assign({}, task), { userId: this.userId })
+            });
+            return newTask;
+        });
+        this.update = (id, task) => __awaiter(this, void 0, void 0, function* () {
+            yield prisma.task.updateMany({
+                where: {
+                    id,
+                    userId: this.userId
+                },
+                data: task
+            });
+        });
+        this.delete = (id) => __awaiter(this, void 0, void 0, function* () {
+            yield prisma.task.deleteMany({
+                where: {
+                    id,
+                    userId: this.userId
+                }
+            });
         });
         this.userId = userId;
     }
