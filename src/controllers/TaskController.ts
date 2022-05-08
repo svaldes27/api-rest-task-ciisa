@@ -60,7 +60,7 @@ export default class TaskController{
       res.json(newTask)
     }catch (error){
       if (error.code === 'P2002'){
-        res.status(409).json({ message: 'This task already exists'})
+        res.status(409).json({ message: 'The name of this task already exists'})
         return
       }
       console.log('Error: ', error.code)

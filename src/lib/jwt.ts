@@ -11,7 +11,7 @@ export function generateToken(user: UserDTO): string {
   return jwt.sign(
   { sub: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email},
     secret,
-    { expiresIn: '6d'}
+    { expiresIn: '8d'}
   )
 }
 
